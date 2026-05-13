@@ -1,0 +1,261 @@
+Based on your dataset columns (`Sales`, `Profit`, `Category`, `Region`, `Order Date`, `Sub-Category`, `State/Province`, `Discount`, `Quantity`, etc.), here are the complete R and Python visualization commands customized for YOUR dataset.
+
+---
+
+# PYTHON COMMANDS
+
+## Import Libraries
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+```
+
+---
+
+# 1. Scatter Plot
+
+## Profit vs Sales
+
+```python
+plt.scatter(dataset['Profit'], dataset['Sales'])
+
+plt.xlabel("Profit")
+plt.ylabel("Sales")
+plt.title("Profit vs Sales")
+
+plt.show()
+```
+
+---
+
+# 2. Line Plot
+
+## Sales Over Time
+
+```python
+dataset['Order Date'] = pd.to_datetime(dataset['Order Date'])
+
+dataset = dataset.sort_values('Order Date')
+
+plt.plot(dataset['Order Date'], dataset['Sales'])
+
+plt.xlabel("Order Date")
+plt.ylabel("Sales")
+plt.title("Sales Over Time")
+
+plt.show()
+```
+
+---
+
+# 3. Bar Plot
+
+## Sales by Category
+
+```python
+sales_by_category = dataset.groupby('Category')['Sales'].sum()
+
+plt.bar(sales_by_category.index, sales_by_category.values)
+
+plt.xlabel("Category")
+plt.ylabel("Sales")
+plt.title("Sales by Category")
+
+plt.show()
+```
+
+---
+
+# 4. Histogram
+
+## Sales Distribution
+
+```python
+plt.hist(dataset['Sales'], bins=20)
+
+plt.xlabel("Sales")
+plt.ylabel("Frequency")
+plt.title("Sales Distribution")
+
+plt.show()
+```
+
+---
+
+# 5. Box Plot
+
+## Profit Distribution
+
+```python
+plt.boxplot(dataset['Profit'])
+
+plt.title("Profit Boxplot")
+
+plt.show()
+```
+
+---
+
+# 6. Pie Chart
+
+## Sales by Region
+
+```python
+region_sales = dataset.groupby('Region')['Sales'].sum()
+
+plt.pie(
+    region_sales.values,
+    labels=region_sales.index,
+    autopct='%1.1f%%'
+)
+
+plt.title("Sales by Region")
+
+plt.show()
+```
+
+---
+
+# 7. Seaborn Scatter Plot
+
+```python
+sns.scatterplot(
+    data=dataset,
+    x='Sales',
+    y='Profit',
+    hue='Category'
+)
+
+plt.show()
+```
+
+---
+
+# 8. Linear Regression
+
+```python
+from sklearn.linear_model import LinearRegression
+
+X = dataset[['Profit']]
+y = dataset['Sales']
+
+model = LinearRegression()
+
+model.fit(X, y)
+
+predictions = model.predict(X)
+
+plt.scatter(X, y)
+plt.plot(X, predictions)
+
+plt.xlabel("Profit")
+plt.ylabel("Sales")
+plt.title("Linear Regression")
+
+plt.show()
+```
+
+---
+
+# 9. KMeans Clustering
+
+```python
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=3)
+
+dataset['Cluster'] = kmeans.fit_predict(
+    dataset[['Sales', 'Profit']]
+)
+
+print(dataset.head())
+```
+
+---
+
+# 10. 3D Plot
+
+```python
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+
+ax = fig.add_subplot(111, projection='3d')
+
+ax.scatter(
+    dataset['Sales'],
+    dataset['Profit'],
+    dataset['Quantity']
+)
+
+ax.set_xlabel('Sales')
+ax.set_ylabel('Profit')
+ax.set_zlabel('Quantity')
+
+plt.show()
+```
+
+---
+
+# 11. Interactive 3D Plot
+
+```python
+fig = px.scatter_3d(
+    dataset,
+    x='Sales',
+    y='Profit',
+    z='Quantity',
+    color='Category'
+)
+
+fig.show()
+```
+
+---
+
+# 12. Revenue by State
+
+```python
+state_sales = (
+    dataset.groupby('State/Province')['Sales']
+    .sum()
+    .sort_values(ascending=False)
+)
+
+plt.barh(state_sales.index, state_sales.values)
+
+plt.xlabel("Sales")
+plt.ylabel("State")
+
+plt.show()
+```
+
+---
+
+# 13. Top 5 Cities by Sales
+
+```python
+top_5 = (
+    dataset.groupby('City')['Sales']
+    .sum()
+    .nlargest(5)
+)
+
+plt.bar(top_5.index, top_5.values)
+
+plt.show()
+```
+
+---
+
+# 14. Correlation Heatmap
+
+```python
+corr = dataset[['Sales','Profit','Quantity','Discount']].corr()
+
+sns.heatmap(corr, annot=True)
+
+plt.show()
