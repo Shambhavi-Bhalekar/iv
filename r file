@@ -1,0 +1,210 @@
+
+# R COMMANDS
+
+## Load Library
+
+```r
+library(ggplot2)
+```
+
+---
+
+# 1. Scatter Plot
+
+```r
+ggplot(dataset, aes(x = Sales, y = Profit)) +
+  geom_point()
+```
+
+---
+
+# 2. Colored Scatter Plot
+
+```r
+ggplot(dataset, aes(x = Sales, y = Profit, color = Category)) +
+  geom_point()
+```
+
+---
+
+# 3. Line Plot
+
+```r
+ggplot(dataset, aes(x = `Order Date`, y = Sales)) +
+  geom_line()
+```
+
+IMPORTANT:
+
+* Remove Year/Quarter/Month/Day hierarchy
+* Use ONLY actual `Order Date`
+
+---
+
+# 4. Bar Plot
+
+```r
+ggplot(dataset, aes(x = Category, y = Sales)) +
+  geom_bar(stat = "identity")
+```
+
+---
+
+# 5. Histogram
+
+```r
+ggplot(dataset, aes(x = Sales)) +
+  geom_histogram(binwidth = 100)
+```
+
+---
+
+# 6. Boxplot
+
+```r
+ggplot(dataset, aes(x = Category, y = Profit)) +
+  geom_boxplot()
+```
+
+---
+
+# 7. Count Plot
+
+```r
+ggplot(dataset, aes(x = Region)) +
+  geom_bar()
+```
+
+---
+
+# 8. Pie Chart
+
+```r
+ggplot(dataset, aes(x = "", y = Sales, fill = Region)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y")
+```
+
+---
+
+# 9. Linear Regression
+
+```r
+ggplot(dataset, aes(x = Profit, y = Sales)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+Regression equation:
+
+genui{"math_block_widget_always_prefetch_v2":{"content":"y = mx + c"}}
+
+---
+
+# 10. 3D Plot
+
+```r
+library(scatterplot3d)
+
+scatterplot3d(
+  dataset$Sales,
+  dataset$Profit,
+  dataset$Quantity,
+  color = "blue",
+  pch = 19
+)
+```
+
+---
+
+# 11. Interactive 3D Plot
+
+```r
+library(plotly)
+
+plot_ly(
+  data = dataset,
+  x = ~Sales,
+  y = ~Profit,
+  z = ~Quantity,
+  type = "scatter3d",
+  mode = "markers",
+  color = ~Category
+)
+```
+
+---
+
+# 12. Sales by Region
+
+```r
+ggplot(dataset, aes(x = Region, y = Sales)) +
+  geom_bar(stat = "identity")
+```
+
+---
+
+# 13. Sales by Sub-Category
+
+```r
+ggplot(dataset, aes(x = `Sub-Category`, y = Sales)) +
+  geom_bar(stat = "identity")
+```
+
+---
+
+# 14. Profit by State
+
+```r
+ggplot(dataset, aes(x = `State/Province`, y = Profit)) +
+  geom_bar(stat = "identity")
+```
+
+---
+
+# IMPORTANT POWER BI NOTES
+
+## Python
+
+Always use:
+
+```python
+dataset['Column']
+```
+
+NOT:
+
+```python
+Column
+```
+
+---
+
+## R
+
+Columns with spaces or special characters:
+
+```r
+`Order Date`
+`Sub-Category`
+`State/Province`
+```
+
+Use backticks.
+
+---
+
+## DATE HIERARCHY ISSUE
+
+DO NOT ADD:
+
+* Year
+* Quarter
+* Month
+* Day
+
+ONLY add:
+
+* Order Date
+
+Otherwise Power BI visuals fail.
