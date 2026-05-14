@@ -1,0 +1,23 @@
+Create a new parameter numeric range 
+Display =
+
+VAR top_customers =
+    TOPN(
+        5,//enter mera field here top n ka value
+        ALL(Orders[Customer Name]),
+        [Total_Orders],
+        DESC
+    )
+
+VAR selected_customer =
+    SELECTEDVALUE(Orders[Customer Name])
+
+RETURN
+
+IF(
+    selected_customer IN top_customers,
+    1,
+    0
+)
+
+filters mei add this measure and set where 1
