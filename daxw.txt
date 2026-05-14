@@ -1,0 +1,847 @@
+DAX Functions — What Each One Does
+
+
+---
+
+1. MATH & STATS FUNCTIONS
+
+These functions perform:
+
+calculations
+
+aggregations
+
+statistical operations
+
+
+
+---
+
+SUM
+
+SUM(Orders[Sales])
+
+Adds all numeric values.
+
+Example: 100 + 200 + 300 = 600
+
+Used for:
+
+total sales
+
+total profit
+
+total quantity
+
+
+
+---
+
+AVERAGE
+
+AVERAGE(Orders[Profit])
+
+Finds mean/average value.
+
+Formula:
+
+\text{Average} = \frac{\text{Sum of Values}}{\text{Number of Values}}
+
+Used for:
+
+average sales
+
+average delivery time
+
+average profit
+
+
+
+---
+
+MAX
+
+MAX(Orders[Sales])
+
+Returns highest value.
+
+Used for:
+
+highest sales
+
+max quantity
+
+top discount
+
+
+
+---
+
+MIN
+
+MIN(Orders[Profit])
+
+Returns smallest value.
+
+Used for:
+
+lowest sales
+
+biggest loss
+
+
+
+---
+
+DIVIDE
+
+DIVIDE(SUM(Profit), SUM(Sales))
+
+Safely divides numbers.
+
+Formula:
+
+\frac{a}{b}
+
+Better than / because:
+
+avoids divide-by-zero errors
+
+
+
+---
+
+COUNT
+
+COUNT(Orders[Sales])
+
+Counts numeric rows only.
+
+Used for:
+
+number of sales records
+
+
+
+---
+
+COUNTA
+
+COUNTA(Orders[Customer Name])
+
+Counts non-empty rows.
+
+Used for:
+
+customer count
+
+text column count
+
+
+
+---
+
+COUNTROWS
+
+COUNTROWS(Orders)
+
+Counts total rows in table.
+
+Used for:
+
+total orders
+
+transactions
+
+
+
+---
+
+DISTINCTCOUNT
+
+DISTINCTCOUNT(Orders[Customer ID])
+
+Counts unique values.
+
+Used for:
+
+unique customers
+
+unique cities
+
+
+
+---
+
+ITERATOR FUNCTIONS (X FUNCTIONS)
+
+These perform row-by-row calculations.
+
+
+---
+
+SUMX
+
+SUMX(Orders, Orders[Sales] * Orders[Quantity])
+
+Loops through rows:
+
+1. calculates each row
+
+
+2. sums results
+
+
+
+Used for:
+
+revenue calculations
+
+weighted totals
+
+
+
+---
+
+AVERAGEX
+
+AVERAGEX(...)
+
+Row-by-row average calculation.
+
+
+---
+
+MAXX / MINX
+
+MAXX(...)
+
+Finds max after row-wise computation.
+
+
+---
+
+RANKX
+
+RANKX(...)
+
+Assigns ranking.
+
+Used for:
+
+top customers
+
+top products
+
+leaderboard
+
+
+
+---
+
+COUNTX
+
+COUNTX(...)
+
+Counts after evaluating expressions row-wise.
+
+
+---
+
+2. LOGICAL FUNCTIONS
+
+Used for:
+
+conditions
+
+decision making
+
+classification
+
+
+
+---
+
+IF
+
+IF(condition, true, false)
+
+Works like:
+
+if-else
+
+
+Used for:
+
+pass/fail
+
+profit/loss
+
+fast/slow delivery
+
+
+
+---
+
+IFERROR
+
+IFERROR(expression, fallback)
+
+Handles errors safely.
+
+Used for:
+
+divide-by-zero handling
+
+
+
+---
+
+AND
+
+AND(condition1, condition2)
+
+Both conditions must be true.
+
+
+---
+
+OR
+
+OR(condition1, condition2)
+
+At least one condition true.
+
+
+---
+
+NOT
+
+NOT(condition)
+
+Reverses logic.
+
+TRUE → FALSE
+
+FALSE → TRUE
+
+
+---
+
+SWITCH
+
+SWITCH(expression,...)
+
+Cleaner alternative to nested IFs.
+
+Used for:
+
+category mapping
+
+region mapping
+
+
+
+---
+
+TRUE / FALSE
+
+Returns Boolean values.
+
+Used inside:
+
+SWITCH(TRUE())
+
+logical tests
+
+
+
+---
+
+3. TEXT FUNCTIONS
+
+Used to manipulate strings/text.
+
+
+---
+
+CONCATENATE
+
+CONCATENATE(A,B)
+
+Joins text.
+
+Example: "East" + "Region"
+
+
+---
+
+FORMAT
+
+FORMAT(value,"₹#,##0")
+
+Changes display format.
+
+Used for:
+
+currency
+
+percentage
+
+dates
+
+
+
+---
+
+LEFT
+
+LEFT(text, n)
+
+Returns first n characters.
+
+
+---
+
+MID
+
+MID(text,start,length)
+
+Extracts middle text.
+
+
+---
+
+RIGHT
+
+RIGHT(text,n)
+
+Returns last n characters.
+
+
+---
+
+UPPER
+
+Converts text → uppercase.
+
+
+---
+
+LOWER
+
+Converts text → lowercase.
+
+
+---
+
+PROPER
+
+Capitalizes each word.
+
+
+---
+
+LEN
+
+Returns text length.
+
+Used for:
+
+validation
+
+parsing
+
+
+
+---
+
+SEARCH
+
+Finds text position (case-insensitive).
+
+
+---
+
+FIND
+
+Finds text position (case-sensitive).
+
+
+---
+
+REPLACE
+
+Replaces text by position.
+
+
+---
+
+REPT
+
+Repeats text multiple times.
+
+
+---
+
+SUBSTITUTE
+
+Replaces matching words.
+
+
+---
+
+TRIM
+
+Removes extra spaces.
+
+
+---
+
+UNICHAR
+
+Returns Unicode character.
+
+Example:
+
+arrows
+
+symbols
+
+emojis
+
+
+
+---
+
+4. FILTER FUNCTIONS
+
+Used for:
+
+filtering
+
+context manipulation
+
+relationships
+
+
+
+---
+
+CALCULATE
+
+Most important DAX function.
+
+Changes filter context.
+
+CALCULATE(SUM(Sales), Region=\"East\")
+
+Used for:
+
+dynamic KPIs
+
+filtered calculations
+
+
+
+---
+
+FILTER
+
+Creates filtered table.
+
+Used inside:
+
+CALCULATE
+
+SUMX
+
+COUNTX
+
+
+
+---
+
+ALL
+
+Removes filters.
+
+Used for:
+
+grand totals
+
+percentages
+
+
+
+---
+
+ALLEXCEPT
+
+Removes all filters except specified columns.
+
+Used for:
+
+grouped analysis
+
+
+
+---
+
+RELATED
+
+Gets value from related table.
+
+Used in:
+
+star schema models
+
+
+
+---
+
+RELATEDTABLE
+
+Returns related rows from another table.
+
+
+---
+
+DISTINCT
+
+Returns unique rows.
+
+
+---
+
+VALUES
+
+Returns unique visible values.
+
+Works with slicers/filter context.
+
+
+---
+
+EARLIER
+
+Used in calculated columns to reference earlier row context.
+
+Advanced row-wise logic.
+
+
+---
+
+HASONEVALUE
+
+Checks if exactly one value selected.
+
+Used in:
+
+slicer validation
+
+
+
+---
+
+HASONEFILTER
+
+Checks if column has active filter.
+
+
+---
+
+ISFILTERED
+
+Checks whether filter exists.
+
+
+---
+
+USERELATIONSHIP
+
+Temporarily activates inactive relationship.
+
+Used when:
+
+multiple date columns exist
+
+
+Example:
+
+Order Date
+
+Ship Date
+
+
+
+---
+
+5. DATE & TIME FUNCTIONS
+
+Used for:
+
+date extraction
+
+delivery analysis
+
+time intelligence
+
+
+
+---
+
+DATEDIFF
+
+Returns difference between dates.
+
+DATEDIFF(start,end,DAY)
+
+Used for:
+
+delivery days
+
+aging analysis
+
+
+
+---
+
+YEAR / MONTH / DAY
+
+Extracts date parts.
+
+Used for:
+
+trends
+
+grouping
+
+
+
+---
+
+HOUR / MINUTE / SECOND
+
+Extracts time parts.
+
+
+---
+
+TODAY
+
+Returns current date.
+
+
+---
+
+NOW
+
+Returns current date + time.
+
+
+---
+
+WEEKDAY
+
+Returns weekday number.
+
+
+---
+
+WEEKNUM
+
+Returns week number.
+
+
+---
+
+TIME INTELLIGENCE FUNCTIONS
+
+Used for:
+
+trend analysis
+
+financial dashboards
+
+period comparison
+
+
+Requires:
+
+proper calendar table
+
+
+
+---
+
+DATESYTD
+
+Year-to-date calculations.
+
+Used for:
+
+YTD sales
+
+YTD profit
+
+
+
+---
+
+DATESQTD
+
+Quarter-to-date calculations.
+
+
+---
+
+DATESMTD
+
+Month-to-date calculations.
+
+
+---
+
+DATEADD
+
+Shifts dates.
+
+Used for:
+
+previous month sales
+
+previous year comparison
+
+
+
+---
+
+DATESINPERIOD
+
+Returns date range.
+
+Used for:
+
+rolling 30 days
+
+rolling 12 months
+
+
+
+---
+
+Most Important DAX Functions for Interviews
+
+Function	Importance
+
+CALCULATE	Highest
+FILTER	Very High
+SUMX	Very High
+RANKX	High
+RELATED	High
+DATEDIFF	High
+SWITCH	High
+ALL	High
+DIVIDE	High
+DATEADD	High
