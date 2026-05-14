@@ -208,3 +208,19 @@ ONLY add:
 * Order Date
 
 Otherwise Power BI visuals fail.
+
+
+top n 
+
+library(dplyr)
+library(ggplot2)
+
+top_customers <- dataset %>%
+  group_by(`Customer Name`) %>%
+  summarise(
+    Total_Orders = n_distinct(`Order ID`)
+  ) %>%
+  arrange(desc(Total_Orders)) %>%
+  head(5)
+
+print(top_customers)
