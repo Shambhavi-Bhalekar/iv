@@ -1,0 +1,757 @@
+DAX Formula Examples (Using Your Orders Dataset)
+
+
+---
+
+1. MATH & STATS FUNCTIONS
+
+SUM
+
+Total_Sales =
+SUM(Orders[Sales])
+
+Adds all Sales values.
+
+
+---
+
+AVERAGE
+
+Average_Profit =
+AVERAGE(Orders[Profit])
+
+Calculates average profit.
+
+
+---
+
+MAX
+
+Max_Sales =
+MAX(Orders[Sales])
+
+Highest sales value.
+
+
+---
+
+MIN
+
+Min_Profit =
+MIN(Orders[Profit])
+
+Lowest profit.
+
+
+---
+
+DIVIDE
+
+Profit_Ratio =
+DIVIDE(
+    SUM(Orders[Profit]),
+    SUM(Orders[Sales])
+)
+
+Safe division.
+
+
+---
+
+COUNT
+
+Sales_Count =
+COUNT(Orders[Sales])
+
+Counts numeric Sales rows.
+
+
+---
+
+COUNTA
+
+Customer_Count =
+COUNTA(Orders[Customer Name])
+
+Counts non-empty customer names.
+
+
+---
+
+COUNTROWS
+
+Total_Orders =
+COUNTROWS(Orders)
+
+Counts total rows.
+
+
+---
+
+DISTINCTCOUNT
+
+Unique_Customers =
+DISTINCTCOUNT(Orders[Customer ID])
+
+Counts unique customers.
+
+
+---
+
+ITERATOR FUNCTIONS
+
+SUMX
+
+Total_Revenue =
+SUMX(
+    Orders,
+    Orders[Sales] * Orders[Quantity]
+)
+
+Row-wise multiplication then sum.
+
+
+---
+
+AVERAGEX
+
+Average_Revenue =
+AVERAGEX(
+    Orders,
+    Orders[Sales] * Orders[Quantity]
+)
+
+
+---
+
+MAXX
+
+Max_Revenue =
+MAXX(
+    Orders,
+    Orders[Sales] * Orders[Quantity]
+)
+
+
+---
+
+MINX
+
+Min_Revenue =
+MINX(
+    Orders,
+    Orders[Sales] * Orders[Quantity]
+)
+
+
+---
+
+RANKX
+
+City_Rank =
+RANKX(
+    ALL(Orders[City]),
+    SUM(Orders[Sales]),
+    ,
+    DESC
+)
+
+Ranks cities by sales.
+
+
+---
+
+COUNTX
+
+High_Sales_Count =
+COUNTX(
+    FILTER(Orders, Orders[Sales] > 1000),
+    Orders[Sales]
+)
+
+
+---
+
+2. LOGICAL FUNCTIONS
+
+IF
+
+Profit_Status =
+IF(
+    Orders[Profit] > 0,
+    "Profit",
+    "Loss"
+)
+
+
+---
+
+IFERROR
+
+Safe_Division =
+IFERROR(
+    Orders[Profit] / Orders[Sales],
+    0
+)
+
+
+---
+
+AND
+
+High_Performance =
+IF(
+    AND(
+        Orders[Sales] > 1000,
+        Orders[Profit] > 100
+    ),
+    "Good",
+    "Average"
+)
+
+
+---
+
+OR
+
+Special_Order =
+IF(
+    OR(
+        Orders[Discount] > 0.5,
+        Orders[Profit] < 0
+    ),
+    "Risky",
+    "Normal"
+)
+
+
+---
+
+NOT
+
+No_Discount =
+IF(
+    NOT(Orders[Discount] > 0),
+    "No Discount",
+    "Discount Given"
+)
+
+
+---
+
+SWITCH
+
+Region_Code =
+SWITCH(
+    Orders[Region],
+    "East", "E",
+    "West", "W",
+    "Central", "C",
+    "South", "S",
+    "Other"
+)
+
+
+---
+
+TRUE
+
+Delivery_Status =
+SWITCH(
+    TRUE(),
+    Orders[Quantity] > 10, "Bulk",
+    Orders[Quantity] > 5, "Medium",
+    "Small"
+)
+
+
+---
+
+FALSE
+
+Always_False =
+FALSE()
+
+Returns False.
+
+
+---
+
+3. TEXT FUNCTIONS
+
+CONCATENATE
+
+Full_Info =
+CONCATENATE(
+    Orders[City],
+    Orders[Region]
+)
+
+
+---
+
+FORMAT
+
+Formatted_Sales =
+FORMAT(
+    Orders[Sales],
+    "₹#,##0"
+)
+
+
+---
+
+LEFT
+
+First_3 =
+LEFT(
+    Orders[Customer Name],
+    3
+)
+
+
+---
+
+MID
+
+Middle_Text =
+MID(
+    Orders[Customer Name],
+    2,
+    4
+)
+
+
+---
+
+RIGHT
+
+Last_2 =
+RIGHT(
+    Orders[Customer Name],
+    2
+)
+
+
+---
+
+UPPER
+
+Upper_City =
+UPPER(Orders[City])
+
+
+---
+
+LOWER
+
+Lower_Region =
+LOWER(Orders[Region])
+
+
+---
+
+PROPER
+
+Proper_Name =
+PROPER(Orders[Customer Name])
+
+
+---
+
+LEN
+
+Name_Length =
+LEN(Orders[Customer Name])
+
+
+---
+
+SEARCH
+
+Contains_A =
+SEARCH(
+    "A",
+    Orders[Customer Name],
+    1,
+    0
+)
+
+
+---
+
+FIND
+
+Find_A =
+FIND(
+    "A",
+    Orders[Customer Name],
+    1,
+    0
+)
+
+
+---
+
+REPLACE
+
+Replace_Text =
+REPLACE(
+    Orders[Region],
+    1,
+    2,
+    "XX"
+)
+
+
+---
+
+REPT
+
+Repeat_Star =
+REPT("*", Orders[Quantity])
+
+
+---
+
+SUBSTITUTE
+
+Substitute_Text =
+SUBSTITUTE(
+    Orders[Region],
+    "East",
+    "EAST REGION"
+)
+
+
+---
+
+TRIM
+
+Trim_Name =
+TRIM(Orders[Customer Name])
+
+
+---
+
+UNICHAR
+
+Arrow =
+UNICHAR(8594)
+
+Arrow symbol.
+
+
+---
+
+4. FILTER FUNCTIONS
+
+CALCULATE
+
+East_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    Orders[Region] = "East"
+)
+
+
+---
+
+FILTER
+
+High_Profit =
+FILTER(
+    Orders,
+    Orders[Profit] > 1000
+)
+
+
+---
+
+ALL
+
+Overall_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    ALL(Orders)
+)
+
+Ignores filters.
+
+
+---
+
+ALLEXCEPT
+
+Sales_By_Region =
+CALCULATE(
+    SUM(Orders[Sales]),
+    ALLEXCEPT(
+        Orders,
+        Orders[Region]
+    )
+)
+
+
+---
+
+RELATED
+
+Manager_Name =
+RELATED(People[Regional Manager])
+
+Gets related table value.
+
+
+---
+
+RELATEDTABLE
+
+Orders_Count =
+COUNTROWS(
+    RELATEDTABLE(Orders)
+)
+
+
+---
+
+DISTINCT
+
+Unique_Regions =
+DISTINCT(Orders[Region])
+
+
+---
+
+VALUES
+
+Region_Values =
+VALUES(Orders[Region])
+
+
+---
+
+EARLIER
+
+Rank_Column =
+COUNTROWS(
+    FILTER(
+        Orders,
+        EARLIER(Orders[Sales]) < Orders[Sales]
+    )
+) + 1
+
+
+---
+
+HASONEVALUE
+
+Single_Region =
+HASONEVALUE(Orders[Region])
+
+
+---
+
+HASONEFILTER
+
+Filtered_Region =
+HASONEFILTER(Orders[Region])
+
+
+---
+
+ISFILTERED
+
+Check_Filter =
+ISFILTERED(Orders[Region])
+
+
+---
+
+USERELATIONSHIP
+
+Ship_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    USERELATIONSHIP(
+        Orders[Ship Date],
+        Calendar[Date]
+    )
+)
+
+
+---
+
+5. DATE & TIME FUNCTIONS
+
+DATEDIFF
+
+Delivery_Days =
+DATEDIFF(
+    Orders[Order Date],
+    Orders[Ship Date],
+    DAY
+)
+
+
+---
+
+YEARFRAC
+
+Year_Fraction =
+YEARFRAC(
+    Orders[Order Date],
+    Orders[Ship Date]
+)
+
+
+---
+
+YEAR
+
+Order_Year =
+YEAR(Orders[Order Date])
+
+
+---
+
+MONTH
+
+Order_Month =
+MONTH(Orders[Order Date])
+
+
+---
+
+DAY
+
+Order_Day =
+DAY(Orders[Order Date])
+
+
+---
+
+HOUR
+
+Order_Hour =
+HOUR(Orders[Order Date])
+
+
+---
+
+MINUTE
+
+Order_Minute =
+MINUTE(Orders[Order Date])
+
+
+---
+
+SECOND
+
+Order_Second =
+SECOND(Orders[Order Date])
+
+
+---
+
+TODAY
+
+Today_Date =
+TODAY()
+
+
+---
+
+NOW
+
+Current_Time =
+NOW()
+
+
+---
+
+WEEKDAY
+
+Weekday_Number =
+WEEKDAY(Orders[Order Date])
+
+
+---
+
+WEEKNUM
+
+Week_Number =
+WEEKNUM(Orders[Order Date])
+
+
+---
+
+TIME INTELLIGENCE FUNCTIONS
+
+DATESYTD
+
+YTD_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    DATESYTD(Calendar[Date])
+)
+
+Year-to-date sales.
+
+
+---
+
+DATESQTD
+
+QTD_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    DATESQTD(Calendar[Date])
+)
+
+Quarter-to-date sales.
+
+
+---
+
+DATESMTD
+
+MTD_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    DATESMTD(Calendar[Date])
+)
+
+Month-to-date sales.
+
+
+---
+
+DATEADD
+
+Previous_Month_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    DATEADD(
+        Calendar[Date],
+        -1,
+        MONTH
+    )
+)
+
+
+---
+
+DATESINPERIOD
+
+Last_30_Days_Sales =
+CALCULATE(
+    SUM(Orders[Sales]),
+    DATESINPERIOD(
+        Calendar[Date],
+        MAX(Calendar[Date]),
+        -30,
+        DAY
+    )
+)
