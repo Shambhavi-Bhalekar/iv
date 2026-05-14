@@ -259,3 +259,29 @@ corr = dataset[['Sales','Profit','Quantity','Discount']].corr()
 sns.heatmap(corr, annot=True)
 
 plt.show()
+
+topn 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Count orders per customer
+top_customers = (
+    dataset.groupby('Customer Name')['Order ID']
+    .nunique()
+    .sort_values(ascending=False)
+    .head(5)
+)
+
+# Print result
+print(top_customers)
+
+# Plot
+plt.bar(top_customers.index, top_customers.values)
+
+plt.xlabel("Customer Name")
+plt.ylabel("Number of Orders")
+plt.title("Top 5 Customers by Orders")
+
+plt.xticks(rotation=45)
+
+plt.show()
